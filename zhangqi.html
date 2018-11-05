@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test</title>
+  <!-- <link href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet"> -->
+  <style>
+  html, body {
+    height: 100%;
+  }
+  .container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .box {
+    position: relative;
+    width: 533px;
+  }
+  </style>
+  <!-- <script src="js/lodash.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/zQuery.js"></script> -->
+  <script src="js/fip.js"></script>
+  <script src="js/paper-cutter.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <div class="box">
+    <img src="images/9.jpg" id="img" alt="">
+  </div>
+  <div class="a"><img src="" alt=""><img src="" alt=""></div>
+</div>
+
+<script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+// let imageDom = document.querySelector(`#img`)
+// imageDom.crossOrigin = 'anonymous'
+// let currentPaper = { cutter: null }
+// currentPaper.cutter = new PaperCutter(imageDom, {
+//   autoReload: true,
+//   onInit: () => {
+//     this.currentPaper.cutter.recoverFromRects(this.currentPaper.cuttedImagesRects.map(d => d.rect))
+//   },
+//   onchange: () => {
+//     // this.cutImage()
+//     console.log(currentPaper.cutter.cutToRects())
+//   }
+// })
+
+
+
+// let file = document.querySelector('#file')
+// let btn = document.querySelector('#btn')
+// let box = document.querySelector('.box')
+
+// file.onchange = function (e) {
+//   let file = e.target.files[0]
+//   let reader = new FileReader()
+//   reader.readAsArrayBuffer(file)
+//   reader.onload = evt => {
+//     let bf = evt.target.result
+//     let blob = new Blob([bf], {type: 'text/plain'})
+//     let str = URL.createObjectURL(blob)
+//     addImage(str)
+//   }
+// }
+
+// function addImage (url) {
+//   let img = new Image()
+//   img.onload = function () {
+//     box.innerHTML = `<img src='${url}'>`
+//   }
+//   img.src = url
+// }
+
+// btn.onclick = function () {
+//   let img = box.querySelector('img')
+//   let url = rotateImageToDataUrl(img, 90)
+//   img.src = url
+// }
+
+// function rotateImageToDataUrl (image, deg) {
+//   let canvas = document.createElement('canvas')
+//   let context = canvas.getContext('2d')
+//   canvas.width = image.naturalHeight
+//   canvas.height = image.naturalWidth
+//   context.save()
+//   context.translate(canvas.width / 2, canvas.height / 2)
+//   context.rotate(deg * Math.PI / 180)
+//   context.drawImage(image, -canvas.height / 2, -canvas.width / 2, canvas.height, canvas.width)
+//   context.restore()
+//   return canvas.toDataURL()
+// }
+
+
+// let obj = {}
+
+// let copy = {
+//   name: 'zhangqi',
+//   age: 30,
+//   fn () {
+//     console.log(this.name)
+//   },
+//   family: {
+//     name: 'zhaojinge',
+//     age: 28
+//   }
+// }
+
+// extend(true, obj, copy, {aaa: 1}, {bbb: 2})
+
+// console.log(obj)
+
+
+// const dict = {
+//   "ge": "哥歌搁戈鸽胳疙割革葛格阁隔铬个各鬲仡哿塥嗝纥搿膈硌铪镉袼颌虼舸骼髂",
+//   "jin": "巾筋斤金今津襟紧锦仅谨进靳晋禁近烬浸尽卺荩堇噤馑廑妗缙瑾槿赆觐钅锓衿矜",
+//   "qi": "奇",
+//   "zhang": "樟章彰漳张掌涨杖丈帐账仗胀瘴障仉鄣幛嶂獐嫜璋蟑",
+//   "zhao": "招昭找沼赵照罩兆肇召爪诏棹钊笊",
+// }
+
+// const invert = {}
+// for (let pinyin in dict) {
+//   let words = dict[pinyin]
+//   for (let i = 0, len = words.length; i < len; i++) {
+//     invert[words[i]] = pinyin
+//   }
+// }
+
+// const convert = text => {
+//   let result = ''
+//   for (let i = 0, len = text.length; i < len; i++) {
+//     let char = text[i]
+//     let charCode = char.charCodeAt(0)
+//     // 如果不在汉字处理范围内，返回原字符
+//     if (charCode > 40869 || charCode < 19968) {
+//       result += char
+//     } else {
+//       let name = invert[char]
+//       if (name !== undefined) result += name
+//     }
+//   }
+//   return result
+// }
+
+// const convertFull = text => {
+//   let full = ''
+//   let short = ''
+//   let map = []
+//   for (let i = 0, len = text.length; i < len; i++) {
+//     let char = text[i]
+//     let charCode = char.charCodeAt(0)
+
+//     map.push(full.length)
+//     if (charCode > 40869 || charCode < 19968) {
+//       full += char
+//       short += char
+//     } else {
+//       let name = invert[char]
+//       if (name) {
+//         full += name
+//         short += name[0]
+//       } else {
+//         full += char
+//         short += char
+//       }
+//     }
+//   }
+//   return {full, short, map, text}
+// }
+
+// const test = (pinyin, filter, isIgnoreCase) => {
+//   if (!filter) return false
+//   if (isIgnoreCase) filter = filter.toLowerCase()
+//   let text = isIgnoreCase ? pinyin.text.toLowerCase() : pinyin.text
+//   if (text.includes(filter)) return true
+//   let short = isIgnoreCase ? pinyin.short.toLowerCase() : pinyin.short
+//   if (short.includes(filter)) return true
+//   let full = isIgnoreCase ? pinyin.full.toLowerCase() : pinyin.full
+//   return full.includes(filter)
+// }
+
+// const compare = (a, b, isIgnoreCase) => {
+//   a = convert(a)
+//   b = convert(b)
+//   if (isIgnoreCase) {
+//     a = a.toLowerCase()
+//     b = b.toLowerCase()
+//   }
+//   if (a < b) return -1
+//   if (a > b) return 1
+//   return 0
+// }
+
+// const init = (input, fields, pinyinKey = '$$pinyin') => {
+//   if (!input) return
+//   const setAttr = item => {
+
+//   }
+// }
+
+// const data = [
+//   {name: '张奇'},
+//   {name: '赵金鸽'}
+// ]
+
+// console.log(test(convertFull('张奇'), 'zh'))
+// console.log(test(convertFull('赵金鸽'), 'ge'))
+
+
+
+// function init () {
+//   console.log(1)
+// }
+
+// const arr = [
+//   'https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/01/0E/ChMkJ1uYemCIe9CdAAKWD2HK__IAArodgBa0YIAApYn350.jpg',
+//   'https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/01/0E/ChMkJluYemOIT8_xAAIotdgQ9xEAArodgBy4SsAAijN226.jpg',
+//   'https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/01/0E/ChMkJluYemSITLF5AAVOjtF9fhAAArodgB1odkABU6m301.jpg',
+//   'https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/01/0E/ChMkJ1uYemOIBtopAAJDtg-1dhgAArodgBwnV0AAkPO802.jpg',
+//   'https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/01/0E/ChMkJluYemCIACR6AAIccGL2LZAAArodgBYtPoAAhyI250.jpg'
+// ]
+
+// function loadImage (src) {
+//   let img = new Image()
+//   img.src = src
+//   return new Promise(resolve => {
+//     img.onload = () => { resolve(true) }
+//     img.onerror = () => { resolve(false) }
+//   })
+// }
+
+// async function fn () {
+//   await Promise.all(arr.map(loadImage))
+//   this.init()
+// }
+
+// fn()
+
+// let editor = new Quill('#editor', {
+//   modules: {toolbar: '#toolbar'}
+//   theme: 'snow'
+// })
+
+
+// const map = {
+//   'IV': 4,
+//   'IX': 9,
+//   'XL': 40,
+//   'XC': 90,
+//   'CD': 400,
+//   'CM': 900,
+//   'I': 1,
+//   'V': 5,
+//   'X': 10,
+//   'L': 50,
+//   'C': 100,
+//   'D': 500,
+//   'M': 1000
+// }
+
+// let str1 = 'III'
+// let str2 = 'IV'
+// let str3 = 'IX'
+// let str4 = 'LVIII'
+// let str5 = 'MCMXCIV'
+
+// const romanToInt = function(s) {
+//   const map = {
+//     'I': 1,
+//     'V': 5,
+//     'X': 10,
+//     'L': 50,
+//     'C': 100,
+//     'D': 500,
+//     'M': 1000
+//   }
+//   let res = 0
+
+//   for (let i = s.length - 1; i >= 0; i--) {
+//     let char = map[s[i]]
+//     let nextChar = map[s[i-1]]
+//     if (nextChar < char) {
+//       res += char - nextChar
+//       i--
+//     } else {
+//       res += char
+//     }
+//   }
+//   return res
+// }
+
+// console.log(romanToInt(str1))
+// console.log(romanToInt(str2))
+// console.log(romanToInt(str3))
+// console.log(romanToInt(str4))
+// console.log(romanToInt(str5))
+
+
+// const convert = (s, numRows) => {
+//   let res = [[]]
+//   let str = ''
+//   let q = 
+//   for (let i = 0, len = s.length; i < len; i++) {
+//     let la = res[res.length - 1]
+//     let num = res.length % 2 === 0 ? 1 : 3
+//     if (la.length === num) {
+//       res[res.length] = [s[i]]
+//     } else {
+//       la.push(s[i])
+//     }
+//   }
+
+//   return res
+// }
+
+// console.log(convert('PAYPALISHIRING', 3))
+
+
+
+
+
+// const getSpace = num => {
+//   return '&nbsp;'.repeat(num)
+// }
+
+// let body = `<p style="text-align:center;"><strong>B</strong></p><p>&nbsp; &nbsp; The second Sunday in May is Mother's Day. It is a holiday in both Britain <u>&nbsp;&nbsp;41 &nbsp;</u>the USA. On that day children send <u>&nbsp;&nbsp;42 &nbsp;</u>to their mothers. They give their mothers presents.<u>&nbsp;&nbsp;43 &nbsp;</u>&nbsp;and children do the housework so that mothers can have<u>&nbsp;&nbsp;44 &nbsp;</u>.</p><p>&nbsp;&nbsp;&nbsp;&nbsp;Mother's Day <u>&nbsp;&nbsp;45 &nbsp;</u>&nbsp;in the 1860s. There was a small town in the USA. People there fought ( 打斗) against each other and<u>&nbsp;&nbsp;46 &nbsp;</u>each other. Mrs Javis started "Mother's Friendship Day". On that day she<u>&nbsp;&nbsp;47 &nbsp;</u>all the other mothers in her town and wanted people to be<u>&nbsp;&nbsp;48 &nbsp;</u>again. After she died, her daughter did the<u>&nbsp;&nbsp;49 &nbsp;</u>thing. In 1908, Mother's Friendship Day became Mother's<u>&nbsp;&nbsp;50 &nbsp;</u>.</p>`
+
+// let uReg = /<u>(\s?(?:&nbsp;)*\s?\d+\s?(?:&nbsp;)*\s?)<\/u>/g
+
+// let res = body.replace(uReg, (match, a) => {
+//   return `<span x-underline>${a}</span>`
+// })
+
+// console.log(res)
+
+// let body = '<p><strong>根据对话内容，从方框内的选项中选出能填入空白处的最佳选项。选项中有两项多余。</strong></p><p>A: Hi,Thomas. You look excited.<u>&nbsp;&nbsp;&nbsp;71 &nbsp;&nbsp;</u></p><p>B: Hi,Peter. I’ve just returned from the Museum of Universe.<u>&nbsp;&nbsp;72 &nbsp;&nbsp;</u></p><p>A: Really?<u>&nbsp;&nbsp;73 &nbsp;&nbsp;</u></p><p>B: Yes, of course. Here you are. Look, these are taken beside the space shuttle.<u>&nbsp;&nbsp;74 &nbsp;&nbsp;</u></p><p>A: Oh, <u>&nbsp;&nbsp;jdsoi&nbsp;&nbsp;</u>it’s great.</p><p>B: <u>&nbsp;&nbsp;75 &nbsp;&nbsp;</u></p><p>A: No, not yet. But I have planned to go there<u>&nbsp;&nbsp;___&nbsp;123&nbsp;&nbsp;___&nbsp;</u> with my classmates.</p><figure class="image"><img src="http://sigma-content-bank.oss-cn-shanghai.aliyuncs.com/image/publicqea34b8984393435e9539272ecfaffa1c.png"></figure>'
+
+// let uReg = /<u>(\s?(?:&nbsp;)*\s?\d+\s?(?:&nbsp;)*\s?)<\/u>/g
+// let res = body.replace(reg, (match, a) => {
+//   return `<span x-underline>${a}</span>`
+// })
+// let _reg = /(<u>[^_]*)(_+)([^_]*<\/u>)/g
+// let uReg = /<u>(\s?(?:&nbsp;)*\s?\d+\s?(?:&nbsp;)*\s?)<\/u>/g
+// body = body.replace(_reg, (match, $1, $2, $3) => {
+//   return `${$1}${getSpace($2.length)}${$3}`
+// }).replace(uReg, (match, $1) => {
+//   return `<span x-underline>${$1}</span>`
+// })
+
+// console.log(body)
+
+// let body = '<p>&nbsp;---Would you please show me the pictures of __________ ?</p><p>--- You mean _________ we took when we were in Yangshuo last Saturday?</p>'
+
+// let reg = /(_{2,})/g
+
+
+// let res = body.replace(reg, (match, a) => {
+//   let str = ''
+//   for (let i = 0; i < a.length; i++) {
+//     str += '&nbsp;'
+//   }
+//   return `<span x-underline>${str}</span>`
+// })
+
+// console.log(res)
+
+
+
+
+
+// let body = '第一god题'
+
+// let reg = /(god)/gi
+
+// let el = document.createElement('div')
+// el.innerHTML = body
+
+// const helper = (el, parent) => {
+//   if (el.nodeType === Node.TEXT_NODE) {
+//     const html =  el.textContent.replace(reg, (match, $1) => {
+//       return `<span style="color: #f00">${$1}</span>`
+//     })
+//     const node = document.createElement('span')
+//     node.innerHTML = html
+//     parent.replaceChild(node, el)
+//   } else if (el.nodeType === Node.ELEMENT_NODE) {
+//     [...el.childNodes].forEach(child => helper(child, el))
+//   }
+// }
+
+// helper(el)
+
+// console.log(el.innerHTML)
+
+
+
+
+
+
+
+
+// body = body.replace(reg, (match, $1) => {
+//   return `<span style="color: #f00">${$1}</span>`
+// })
+
+// console.log(body)
+// document.querySelector('#box').innerHTML = el.innerHTML
+// console.log(reg.test(body))
+
+
+
+
+// 函数节流
+// function throttle (fn, gapTime) {
+//   let _lastTime = null
+
+//   return () => {
+//     let _nowTime = +new Date()
+//     if (_nowTime - _lastTime > gapTime || !_lastTime) {
+//       fn()
+//       _lastTime = _nowTime
+//     }
+//   }
+// }
+
+// const fn = () => {
+//   console.log('jdoifds')
+// }
+
+// setInterval(throttle(fn, 1000), 10)
+
+// 函数防抖
+// function debounce (fn, wait) {
+//   let timer = null
+//   return function () {
+//     let args = arguments
+//     if (timer) {
+//       clearTimeout(timer)
+//       timer = null
+//     }
+//     timer = setTimeout(() => {
+//       fn.apply(this, args)
+//     }, wait)
+//   }
+// }
+
+// const fn = () => {
+//   console.log('dsjoifds')
+// }
+
+// setInterval(debounce(fn, 500), 1000)
+// setInterval(debounce(fn, 2000), 1000)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// let editor = document.querySelector('#editor')
+// let btn = document.querySelector('#btn')
+
+// editor.innerHTML = 'jsidoappjfoiwenapp'
+
+// btn.addEventListener('click', () => {
+//   let html = editor.innerHTML
+//   html = html.replace(/(app)/g, (match, a, b) => {
+//     return `<span style="color: #f00">${a}</span>`
+//   })
+//   editor.innerHTML = html
+// })
+
+
+</script>
+
+</body>
+</html>

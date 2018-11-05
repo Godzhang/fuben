@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>test</title>
+  <style>
+    
+  </style>
+  <script src="https://cdn.bootcss.com/lodash.js/4.16.1/lodash.js"></script>
+  <script src="js/zepto.js"></script>
+</head>
+<body>
+
+
+
+<script>
+
+
+
+
+// const isValidSudoku = function(arr) {
+//   let n = 9
+//   // 验证行
+//   for(let i = 0; i < n; i++) {
+//     let cur = arr[i]
+//     if (!check(cur)) return false
+//   }
+//   // 验证列
+//   let col = []
+//   for(let i = 0; i < n; i++) {
+//     for(let j = 0; j < n; j++) {
+//       col.push(arr[j][i])
+//     }
+//     if (!check(col)) return false
+//     col = []
+//   }
+//   // 验证单元
+//   let unit = []
+//   for(let i = 0; i < 3; i++) {
+//     for(let j = 0; j < 3; j++) {
+//       unit.push(arr[i][j])
+//     }
+//   }
+//   if (!check(unit)) return false
+//   unit = []
+//   for(let i = 0; i < 3; i++) {
+//     for(let j = 3; j < 6; j++) {
+//       unit.push(arr[i][j])
+//     }
+//   }
+//   if (!check(unit)) return false
+//   unit = []
+//   for(let i = 0; i < 3; i++) {
+//     for(let j = 6; j < 9; j++) {
+//       unit.push(arr[i][j])
+//     }
+//   }
+//   if (!check(unit)) return false
+//   unit = []
+//   for(let i = 3; i < 6; i++) {
+//     for(let j = 0; j < 3; j++) {
+//       unit.push(arr[i][j])
+//     }
+//   }
+//   if (!check(unit)) return false
+//   unit = []
+//   for(let i = 3; i < 6; i++) {
+//     for(let j = 3; j < 6; j++) {
+//       unit.push(arr[i][j])
+//     }
+//   }
+//   if (!check(unit)) return false
+//   unit = []
+//   for(let i = 3; i < 6; i++) {
+//     for(let j = 6; j < 9; j++) {
+//       unit.push(arr[i][j])
+//     }
+//   }
+//   if (!check(unit)) return false
+//   unit = []
+//   for(let i = 6; i < 9; i++) {
+//     for(let j = 0; j < 3; j++) {
+//       unit.push(arr[i][j])
+//     }
+//   }
+//   if (!check(unit)) return false
+//   unit = []
+//   for(let i = 6; i < 9; i++) {
+//     for(let j = 3; j < 6; j++) {
+//       unit.push(arr[i][j])
+//     }
+//   }
+//   if (!check(unit)) return false
+//   unit = []
+//   for(let i = 6; i < 9; i++) {
+//     for(let j = 6; j < 9; j++) {
+//       unit.push(arr[i][j])
+//     }
+//   }
+//   if (!check(unit)) return false
+//   unit = []
+
+//   return true
+// }
+
+// const isValidSudoku = function(board) {
+//   var ch
+
+//   for (var i = 0; i < 9; i++) {
+//     var rowNums = []
+//     var colNums = []
+//     var cubeNums = []
+
+//     for (var j = 0; j < 9; j++) {
+//       ch = board[i][j]
+//       if (ch !== '.') {
+//         if (rowNums.indexOf(ch) > -1) return false
+//         rowNums.push(ch)
+//       }
+
+//       ch = board[j][i]
+//       if (ch !== '.') {
+//         if (colNums.indexOf(ch) > -1) return false
+//         colNums.push(ch)
+//       }
+      
+//       var row = Math.floor(i / 3) * 3 + Math.floor(j / 3)
+//       var col = i % 3 * 3 + j % 3
+//       console.log(row, col)
+//       ch = board[row][col]
+//       if (ch !== '.') {
+//         if (cubeNums.indexOf(ch) > -1) return false
+//         cubeNums.push(ch)
+//       }
+//     }
+//   }
+//   return true
+// }
+
+// function check (arr) {
+//   let str = arr.join('')
+//   str = str.replace(/\./g, '')
+//   let arr1 = str.split('')
+//   let arr2 = [...new Set(arr1)]
+//   return arr1.length === arr2.length
+// }
+
+// const arr1 = [
+//   ["5","3",".",".","7",".",".",".","."],
+//   ["6",".",".","1","9","5",".",".","."],
+//   [".","9","8",".",".",".",".","6","."],
+//   ["8",".",".",".","6",".",".",".","3"],
+//   ["4",".",".","8",".","3",".",".","1"],
+//   ["7",".",".",".","2",".",".",".","6"],
+//   [".","6",".",".",".",".","2","8","."],
+//   [".",".",".","4","1","9",".",".","5"],
+//   [".",".",".",".","8",".",".","7","9"]
+// ]
+// console.log(isValidSudoku(arr1))
+
+// const arr2 = [
+//   ["8","3",".",".","7",".",".",".","."],
+//   ["6",".",".","1","9","5",".",".","."],
+//   [".","9","8",".",".",".",".","6","."],
+//   ["8",".",".",".","6",".",".",".","3"],
+//   ["4",".",".","8",".","3",".",".","1"],
+//   ["7",".",".",".","2",".",".",".","6"],
+//   [".","6",".",".",".",".","2","8","."],
+//   [".",".",".","4","1","9",".",".","5"],
+//   [".",".",".",".","8",".",".","7","9"]
+// ]
+// console.log(isValidSudoku(arr2))
+
+// const arr3 = [
+//   [".",".","4",".",".",".","6","3","."],
+//   [".",".",".",".",".",".",".",".","."],
+//   ["5",".",".",".",".",".",".","9","."],
+//   [".",".",".","5","6",".",".",".","."],
+//   ["4",".","3",".",".",".",".",".","1"],
+//   [".",".",".","7",".",".",".",".","."],
+//   [".",".",".","5",".",".",".",".","."],
+//   [".",".",".",".",".",".",".",".","."],
+//   [".",".",".",".",".",".",".",".","."]
+// ]
+// console.log(isValidSudoku(arr3))
+
+
+// const firstUniqChar = function(s) {
+//   let arr = s.split('')
+//   let len = arr.length
+//   let obj = {}
+
+//   arr.forEach((val, i) => {
+//     if(obj[val]){
+//       obj[val].count++
+//     }else{
+//       obj[val] = {
+//         count: 1,
+//         index: i
+//       }
+//     }
+//   })
+
+//   for(let key in obj){
+//     let value = obj[key]
+//     if(value.count === 1){
+//       return value.index
+//     }
+//   }
+//   return -1
+// }
+
+// const firstUniqChar = function(s) {
+//   let len = s.length
+//   for(let i = 0; i < len; i++){
+//     let c = s.charAt(i)
+//     if(s.indexOf(c) === i && s.lastIndexOf(c) === i){
+//       return i
+//     }
+//   }
+//   return -1
+// }
+
+// console.log(firstUniqChar('leetcode'))
+// console.log(firstUniqChar('loveleetcode'))
+// console.log(firstUniqChar('aabb'))
+
+// const reverse = function(x) {
+//   let min = Math.pow(-2, 31)
+//   let max = Math.pow(2, 31) - 1
+//   let isNegative = x < 0 ? '-' : ''
+//   let s = ('' + Math.abs(x)).split('').reverse().join('')
+//   s = +`${isNegative}${s}`
+//   return (s > max || s < min) ? 0 : s
+// }
+
+// const reverse = function(x) {
+//   if(isIllegal(x)) return 0
+//   let ans = 0
+//   while(x != 0){
+//     ans = ans * 10 + x % 10
+//     console.log(ans)
+//     x = parseInt(x / 10)
+//   }
+//   return isIllegal(ans) ? 0 : ans
+// }
+
+// function isIllegal(num){
+//   let min = Math.pow(-2, 31)
+//   let max = Math.pow(2, 31) - 1
+//   return (num > max || num < min)
+// }
+
+// let n1 = 123
+// let n2 = -123
+// let n3 = 120
+
+// console.log(reverse(n1))
+// console.log(reverse(n2))
+// console.log(reverse(n3))
+// console.log(reverse(1000))
+// console.log(reverse(1534236469))
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 移动0
+// const moveZeroes = function(nums) {
+//   let arr = []
+//   let flag = false
+//   for(let i = nums.length - 1; i >= 0; i--){
+//     let num = nums[i]
+//     let j = nums.lastIndexOf(0, i)
+//     if((j !== i) || (i === j && flag)){
+//       arr.unshift(j)
+//       i = j
+//       flag = true
+//     }
+//   }
+//   for(let i = arr.length - 1; i >= 0; i--){
+//     nums.push(...nums.splice(arr[i], 1))
+//   }
+// }
+
+// const moveZeroes = function(nums) {
+//   for(let i = nums.length - 1; i >= 0; i--){
+//     if (nums[i] === 0) {
+//       nums.splice(i, 1)
+//       nums.push(0)
+//     }
+//   }
+// }
+
+// const moveZeroes = function(nums) {
+//   let i = 0
+//   let len = nums.length
+//   while(i < len){
+//     if(nums[i] === 0){
+//       nums.splice(i, 1)
+//       nums.push(0)
+//       len--
+//     }else{
+//       i++
+//     }
+//   }
+// }
+
+// let arr = [0,0,1,0,3,12,0,0,0,0]
+// moveZeroes(arr)
+// console.log(arr)
+
+// let arr2 = [0,0,0,1]
+// moveZeroes(arr2)
+// console.log(arr2)
+
+
+// 加一
+// const plusOne = function(digits) {
+//   let len = digits.length
+//   if(digits[len - 1] !== 9){
+//     digits[len - 1]++
+//     return digits
+//   }else{
+    
+//   }
+// }
+
+// console.log(plusOne([1,2,3]))
+// console.log(plusOne([4,3,2,1]))
+// console.log(plusOne([9]))
+// console.log(plusOne([9,9,9,9]))
+// console.log(plusOne([6,1,4,5,3,9,0,1,9,5,1,8,6,7,0,5,5,4,3]))
+
+
+
+
+
+
+
+
+// const longestPalindrome = function(s) {
+//   if(!s.length) return
+//   if(s.length === 1) return s
+//   let res = ''
+//   for(let i = 0; i < s.length; i++){
+//     for(let j = i + 1; j <= s.length; j++){
+//       if((j - i) <= res.length) continue
+//       let str = s.slice(i, j)
+//       if(str.length > res.length && isEqual(str)){
+//         res = str
+//       }
+//     }
+//   }
+//   return res
+// }
+
+// function isEqual(str){
+//   return str === str.split('').reverse().join('')
+// }
+
+// console.log(longestPalindrome('babad'))
+// console.log(longestPalindrome('cbbd'))
+// console.log(longestPalindrome('a'))
+// console.log(longestPalindrome('bb'))
+// console.log(longestPalindrome("civilwartestingwhetherthatnaptionoranynartionsoconceivedandsodedicatedcanlongendureWeareqmetonagreatbattlefiemldoftzhatwarWehavecometodedicpateaportionofthatfieldasafinalrestingplaceforthosewhoheregavetheirlivesthatthatnationmightliveItisaltogetherfangandproperthatweshoulddothisButinalargersensewecannotdedicatewecannotconsecratewecannothallowthisgroundThebravelmenlivinganddeadwhostruggledherehaveconsecrateditfaraboveourpoorponwertoaddordetractTgheworldadswfilllittlenotlenorlongrememberwhatwesayherebutitcanneverforgetwhattheydidhereItisforusthelivingrathertobededicatedheretotheulnfinishedworkwhichtheywhofoughtherehavethusfarsonoblyadvancedItisratherforustobeherededicatedtothegreattdafskremainingbeforeusthatfromthesehonoreddeadwetakeincreaseddevotiontothatcauseforwhichtheygavethelastpfullmeasureofdevotionthatweherehighlyresolvethatthesedeadshallnothavediedinvainthatthisnationunsderGodshallhaveanewbirthoffreedomandthatgovernmentofthepeoplebythepeopleforthepeopleshallnotperishfromtheearth"))
+
+// console.time('time')
+
+// longestPalindrome("civilwartestingwhetherthatnaptionoranynartionsoconceivedandsodedicatedcanlongendureWeareqmetonagreatbattlefiemldoftzhatwarWehavecometodedicpateaportionofthatfieldasafinalrestingplaceforthosewhoheregavetheirlivesthatthatnationmightliveItisaltogetherfangandproperthatweshoulddothisButinalargersensewecannotdedicatewecannotconsecratewecannothallowthisgroundThebravelmenlivinganddeadwhostruggledherehaveconsecrateditfaraboveourpoorponwertoaddordetractTgheworldadswfilllittlenotlenorlongrememberwhatwesayherebutitcanneverforgetwhattheydidhereItisforusthelivingrathertobededicatedheretotheulnfinishedworkwhichtheywhofoughtherehavethusfarsonoblyadvancedItisratherforustobeherededicatedtothegreattdafskremainingbeforeusthatfromthesehonoreddeadwetakeincreaseddevotiontothatcauseforwhichtheygavethelastpfullmeasureofdevotionthatweherehighlyresolvethatthesedeadshallnothavediedinvainthatthisnationunsderGodshallhaveanewbirthoffreedomandthatgovernmentofthepeoplebythepeopleforthepeopleshallnotperishfromtheearth")
+
+// console.timeEnd('time')
+
+
+
+</script>
+
+</body>
+</html>

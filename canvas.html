@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>canvas</title>
+  <style>
+  </style>
+  <script src="./js/canvas.js"></script>
+</head>
+<body>
+
+<canvas id="cvs" width="500" height="500"></canvas>
+
+<script>
+
+let cvs = document.querySelector('#cvs')
+let ctx = cvs.getContext('2d')
+
+ctx.fillStyle = '#0af'
+ctx.arc(50, 50, 50, 0, Math.PI * 2)
+ctx.fill()
+
+
+</script>
+
+</body>
+</html>

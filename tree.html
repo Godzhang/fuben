@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>tree</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+  <script src="js/tree.js" type="text/javascript"></script>
+</head>
+<body>
+
+<canvas id="cvs" width="800" height="800" style="border: 1px solid #000;"></canvas>
+
+<script>
+
+// let arr = [6,4,7,8,3,2,5,1,9,10]
+let arr = [5,1,4,null,null,3,6]
+let tree = new BinaryTree()
+arr.forEach(item => {
+  tree.insert(item)
+})
+let root = tree.print()
+// console.log(tree.maxDepth())
+
+// let root = {
+//   key: 5,
+//   left: {
+//     key: 6,
+//     left: null,
+//     right: null
+//   },
+//   right: null
+// }
+
+const isValidBST = root => {
+  if (root.left) {
+    if (root.left.key < root.key) {
+      return isValidBST(root.left)
+    } else {
+      return false
+    }
+  }
+  if (root.right) {
+    if (root.right.key > root.key) {
+      return isValidBST(root.right)
+    } else {
+      return false
+    }
+  }
+  return true
+}
+
+console.log(isValidBST(root))
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

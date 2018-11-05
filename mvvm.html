@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>mvvm</title>
+  <style>
+    
+  </style>
+  <script src="https://cdn.bootcss.com/lodash.js/4.16.1/lodash.js"></script>
+  <script src="mvvm/observer.js"></script>
+  <script src="mvvm/watcher.js"></script>
+  <script src="mvvm/compile.js"></script>
+  <script src="mvvm/index.js"></script>
+</head>
+<body>
+
+
+<div id="app">
+  <h2>{{title}}</h2>
+  <input type="text" q-model="name">
+  <h1>{{name}}</h1>
+  <button q-on:click="onClick">click me!</button>
+</div>
+
+<script>
+
+new Queen({
+  el: '#app',
+  data: {
+    title: 'hello world',
+    name: 'freddie'
+  },
+  methods: {
+    onClick () {
+      this.title = 'I love Queen'
+    }
+  },
+  // mounted () {
+  //   setTimeout(() => {
+  //     this.title = 'john deacon'
+  //   }, 1000)
+  // }
+})
+
+
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

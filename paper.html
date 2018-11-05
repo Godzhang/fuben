@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>paper-cut</title>
+  <style>
+    .imageContainer {
+      position: relative;
+      display: inline-block;
+      border: solid 10px gray;
+      max-width: 50%;
+    }
+
+    .imageContainer img {
+      width: 100%;
+    }
+
+    .imageCuttedContainer {
+      display: inline-block;
+      border: solid 1px silver;
+      padding: 0 0 8px 0;
+      min-width: 200px;
+      min-height: 200px;
+      max-width: 700px;
+      vertical-align: top;
+      background-color: #e0e0e0;
+    }
+
+    .imageCuttedContainer img {
+      border: solid 1px gray;
+      margin: 5px 10px;
+      display: block;
+      width: calc(100% - 20px);
+    }
+
+    .imageCuttedContainer .num {
+      font-size: 14px;
+      margin: 12px 0 0 8px;
+    }
+  </style>
+  <script src="./js/fip.js"></script>
+  <script src="./js/paper-cutter.js"></script>
+</head>
+<body>
+  <div style="margin-bottom: 8px;">
+    点击下列试卷来划分小题
+  </div>
+
+  <div class="imageContainer">
+    <img src="./image/padding-gap.jpg">
+  </div>
+
+  <div class="imageCuttedContainer"></div>
+
+  <script>
+    let image = document.querySelector('.imageContainer img')
+    let paperCutter = new PaperCutter(image, {
+      onchange: cutImages,
+      autoReload: true
+    })
+
+    function cutImages () {
+      let imageCuttedContainer = document.querySelector('.imageCuttedContainer')
+      imageCuttedContainer.innerHTML = ''
+
+      if (!paperCutter) return
+      let cuttedImageSrcs = paperCutter.cutToDataUrls()
+
+      let totalDom = document.createElement('div')
+      totalDom.className = 'num'
+      totalDom.innerText = `共 ${cuttedImageSrcs.length} 道题`
+      imageCuttedContainer.appendChild(totalDom)
+
+      cuttedImageSrcs.forEach((src, index) => {
+        let dom = document.createElement('div')
+        dom.className = 'num'
+        dom.innerText = `第 ${index + 1} 题`
+        imageCuttedContainer.appendChild(dom)
+
+        let img = new Image()
+        img.src = src
+        imageCuttedContainer.appendChild(img)
+      })
+    }
+  </script>
+</body>
+</html>
