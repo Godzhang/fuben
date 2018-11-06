@@ -10,7 +10,7 @@ Watcher.prototype = {
     this.run()
   },
   run () {
-    let value = this.vm.data[this.exp]
+    let value = this._getVMVal(this.vm, this.exp)
     let oldVal = this.value
     if (value !== oldVal) {
       this.value = value
@@ -19,9 +19,18 @@ Watcher.prototype = {
   },
   get () {
     Dep.target = this  //缓存自己
-    let value = this.vm.data[this.exp]
+    // let value = this.vm.data[this.exp]
+    let value = this._getVMVal(this.vm, this.exp)
     Dep.target = null
     return value
+  },
+  _getVMVal (vm, exp) {
+    let val = vm
+    exp = exp.split('.')
+    exp.forEach(k => {
+      val = val[k]
+    })
+    return val
   }
 }
 

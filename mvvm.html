@@ -16,9 +16,10 @@
 
 
 <div id="app">
-  <h2>{{title}}</h2>
-  <input type="text" q-model="name">
-  <h1>{{name}}</h1>
+  <!-- <h2>{{title}}</h2> -->
+  <input type="text" q-model="obj.a">
+  <!-- <h1>{{name}}</h1> -->
+  <!-- <div q-html="html"></div> -->
   <button q-on:click="onClick">click me!</button>
 </div>
 
@@ -28,11 +29,17 @@ new Queen({
   el: '#app',
   data: {
     title: 'hello world',
-    name: 'freddie'
+    name: 'freddie',
+    html: '<span style="color: #f00;">color red</span>',
+    obj: {
+      a: 1
+    }
   },
   methods: {
     onClick () {
-      this.title = 'I love Queen'
+      this.obj.a = 10
+      // this.title = 'I love Queen'
+      // this.html = '<b style="color: #f00;">color red</b>'
     }
   },
   // mounted () {

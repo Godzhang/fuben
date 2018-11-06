@@ -1,3 +1,72 @@
+
+const compileUtil = {
+  text (node, vm, exp) {
+    this.bind(node, vm, exp, 'text')
+  },
+  html (node, vm, exp) {
+    this.bind(node, vm, exp, 'html')
+  },
+  model (node, vm, exp) {
+    this.bind(node, vm, exp, 'model')
+
+    let val = this._getVMVal(vm, exp)
+    node.addEventListener('input', e => {
+      let newValue = e.target.value
+      if (val === newValue) return
+      this._setVMVal(vm, exp, newValue)
+      val = newValue
+    })
+  },
+  bind (node, vm, exp, dir) {
+    let updaterFn = updater[`${dir}Updater`]
+
+    updaterFn && updaterFn(node, this._getVMVal(vm, exp))
+
+    new Watcher(vm, exp, (value, oldValue) => {
+      updaterFn && updaterFn(node, value, oldValue)
+    })
+  },
+  eventHandler (node, vm, exp, dir) {
+    let eventType = dir.split(':')[1]
+    let cb= vm.methods && vm.methods[exp]
+
+    if (eventType && cb) {
+      node.addEventListener(eventType, cb.bind(vm), false)
+    }
+  },
+  _getVMVal (vm, exp) {
+    let val = vm
+    exp = exp.split('.')
+    exp.forEach(k => {
+      val = val[k]
+    })
+    return val
+  },
+  _setVMVal (vm, exp, value) {
+    let val = vm
+    exp = exp.split('.')
+    exp.forEach((k, i) => {
+      if (i < exp.length - 1) {
+        val = val[k]
+      } else {
+        val[k] = value
+      }
+    })
+  }
+}
+
+const updater = {
+  textUpdater (node, value) {
+    node.textContent = typeof value === 'undefined' ? '' : value
+  },
+  htmlUpdater (node, value) {
+    node.innerHTML = typeof value === 'undefined' ? '' : value
+  },
+  modelUpdater (node, value, oldValue) {
+    node.value = typeof value === 'undefined' ? '' : value
+  }
+}
+
 function Compile (el, vm) {
   this.vm = vm
   this.el = document.querySelector(el)
@@ -49,50 +118,16 @@ Compile.prototype = {
         let exp = attr.value
         let dir = attrName.substring(2)
         if (this.isEventDirective(dir)) {
-          this.compileEvent(node, this.vm, exp, dir)
+          compileUtil.eventHandler(node, this.vm, exp, dir)
         } else {
-          this.compileModel(node, this.vm, exp, dir)
+          compileUtil[dir] && compileUtil[dir](node, this.vm, exp)
         }
         node.removeAttribute(attrName)
       }
     })
   },
   compileText (node, exp) {
-    let initText = this.vm[exp]
-    this.updateText(node, initText)
-    new Watcher(this.vm, exp, value => {
-      this.updateText(node, value)
-    })
-  },
-  // v-on:click="onClick"
-  // dir: on:click
-  compileEvent (node, vm, exp, dir) {
-    let eventType = dir.split(':')[1]
-    let cb = vm.methods && vm.methods[exp]
-
-    if (eventType && cb) {
-      node.addEventListener(eventType, cb.bind(vm), false)
-    }
-  },
-  compileModel (node, vm, exp, dir) {
-    let value = vm[exp]
-    this.modelUpdater(node, value)
-    new Watcher(this.vm, exp, value => {
-      this.modelUpdater(node, value)
-    })
-
-    node.addEventListener('input', e => {
-      let newValue = e.target.value
-      if (value === newValue) return
-      this.vm[exp] = newValue
-      value = newValue
-    })
-  },
-  updateText (node, value) {
-    node.textContent = typeof value === 'undefined' ? '' : value
-  },
-  modelUpdater (node, value) {
-    node.value = typeof value === 'undefined' ? '' : value
+    compileUtil.text(node, this.vm, exp)
   },
   isDirective (attr) {
     return attr.indexOf('q-') === 0
@@ -107,3 +142,4 @@ Compile.prototype = {
     return node.nodeType === 3
   }
 }
+

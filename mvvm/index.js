@@ -8,11 +8,6 @@ function Queen (options) {
 
   observe(this.data)
   new Compile(options.el, this)
-  // el.innerHTML = this.data[exp]
-  // new Watcher(this, exp, function (value) {
-  //   el.innerHTML = value
-  // })
-  // return this
   options.mounted && options.mounted.call(this)
 }
 
