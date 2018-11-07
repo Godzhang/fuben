@@ -22,8 +22,9 @@
   <!-- <script src="js/lodash.js"></script>
   <script src="js/utils.js"></script>
   <script src="js/zQuery.js"></script> -->
-  <script src="js/fip.js"></script>
-  <script src="js/paper-cutter.js"></script>
+  <!-- <script src="js/fip.js"></script>
+  <script src="js/paper-cutter.js"></script> -->
+  <script src="js/underscore.js"></script>
 </head>
 <body>
 
@@ -36,11 +37,18 @@
 
 <script>
 
-let map = new Map()
+// var obj = {toString: null};
+// console.log(obj.propertyIsEnumerable('toStirng'));
 
-map.set(/box_\d$/, () => {console.log(1)})
-
-
+var obj = {
+  a: 1,
+  toString: function () {
+    return 1
+  }
+}
+for (var key in obj) {
+  console.log(key)
+}
 
 
 // let imageDom = document.querySelector(`#img`)
